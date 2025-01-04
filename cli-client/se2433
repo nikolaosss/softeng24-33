@@ -1,0 +1,114 @@
+#!/usr/bin/env python
+
+import argparse
+from commands.healthcheck import healthcheck
+from commands.resetstations import resetstations
+from commands.resetpasses import resetpasses # type: ignore
+from commands.tollstationpasses import tollstationpasses
+from commands.login import login # type: ignore
+from commands.logout import logout
+from commands.chargesby import chargesby
+from commands.passescost import passescost
+from commands.admin_addpasses import admin_addpasses
+from commands.admin_usermod import admin_usermod
+from commands.passanalysis import passanalysis
+from commands.admin_users import admin_users
+
+# Η URL του mock API
+BASE_URL = "http://localhost:5000/api"
+
+# Περιγραφές παραμέτρων ανά scope
+HELP_DETAILS = {
+    "healthcheck": "Χωρίς παραμέτρους.",
+    "resetstations": "Χωρίς παραμέτρους.",
+    "resetpasses": "Χωρίς παραμέτρους.",
+    "tollstationpasses": "--station <ID> (απαραίτητο), --from <YYYYMMDD> (προαιρετικό), --to <YYYYMMDD> (προαιρετικό), --format <json|csv> (προεπιλογή: csv).",
+    "login": "--username <USERNAME> (απαραίτητο), --passw <PASSWORD> (απαραίτητο).",
+    "logout": "Χωρίς παραμέτρους.",
+    "passanalysis": "--stationop <ID> (απαραίτητο), --tagop <ID> (απαραίτητο), --from <YYYYMMDD> (προαιρετικό), --to <YYYYMMDD> (προαιρετικό), --format <json|csv> (προεπιλογή: csv).",
+    "passescost": "--stationop <ID> (απαραίτητο), --tagop <ID> (απαραίτητο), --from <YYYYMMDD> (προαιρετικό), --to <YYYYMMDD> (προαιρετικό), --opid <ID> (προαιρετικό).",
+    "chargesby": "--opid <ID> (απαραίτητο), --from <YYYYMMDD> (προαιρετικό), --to <YYYYMMDD> (προαιρετικό).",
+    "admin": "--username <USERNAME> και --passw <PASSWORD> για τροποποίηση χρήστη ή --source <CSV FILE> για εισαγωγή δεδομένων ή Χωρίς παραμέτρους για λίστα χρηστών."
+}
+
+def display_scope_help(scope):
+    """Εμφάνιση βοήθειας για συγκεκριμένο scope."""
+    if scope in HELP_DETAILS:
+        print(f"Οδηγίες για '{scope}':\n{HELP_DETAILS[scope]}")
+    else:
+        print(f"Άγνωστο scope: {scope}")
+
+def main():
+    parser = argparse.ArgumentParser(description="CLI για το σύστημα διαλειτουργικότητας.")
+    parser.add_argument("scope", choices=["healthcheck", "resetstations", "resetpasses", "tollstationpasses", "login", "logout", "passanalysis", "passescost", "chargesby", "admin"], help="Scope of the command")
+    parser.add_argument("--username", help="Username for login or usermod")
+    parser.add_argument("--passw", help="Password for login or usermod")
+    parser.add_argument("--station", help="Toll station ID")
+    parser.add_argument("--stationop", help="Station operator ID")
+    parser.add_argument("--tagop", help="Tag operator ID")
+    parser.add_argument("--from", dest="from_date", help="Start date (YYYYMMDD)")
+    parser.add_argument("--to", dest="to_date", help="End date (YYYYMMDD)")
+    parser.add_argument("--opid", help="Operator ID")
+    parser.add_argument("--source", help="Source CSV file")
+    parser.add_argument("--format", choices=["json", "csv"], default="csv", help="Output format")
+
+    args = parser.parse_args()
+
+    # Αν δεν δόθηκαν επιχειρήματα
+    if not args.scope:
+        print("Δεν δόθηκε scope. Εμφάνιση υποστηριζόμενων scopes:\n")
+        for scope, details in HELP_DETAILS.items():
+            print(f"{scope}: {details}")
+        return
+
+    # Αν δόθηκε scope αλλά λείπουν οι απαραίτητες παράμετροι
+    if args.scope in HELP_DETAILS:
+        # Ελέγχουμε για ελλιπείς παραμέτρους βάσει του scope
+        if args.scope == "login" and not (args.username and args.passw):
+            display_scope_help("login")
+            return
+        elif args.scope == "tollstationpasses" and not args.station:
+            display_scope_help("tollstationpasses")
+            return
+        elif args.scope == "passanalysis" and not (args.stationop and args.tagop):
+            display_scope_help("passanalysis")
+            return
+        elif args.scope == "passescost" and not (args.stationop and args.tagop):
+            display_scope_help("passescost")
+            return
+        elif args.scope == "chargesby" and not args.opid:
+            display_scope_help("chargesby")
+            return
+
+    if args.scope == "healthcheck":
+        healthcheck()
+    elif args.scope == "resetstations":
+        resetstations()
+    elif args.scope == "resetpasses":
+        resetpasses()
+    elif args.scope == "tollstationpasses":
+        tollstationpasses(args.station, args.from_date, args.to_date, args.format)
+    elif args.scope == "login":
+        login(args.username, args.passw)
+    elif args.scope == "logout":
+        logout()
+    elif args.scope == "passanalysis":
+        passanalysis(args.stationop, args.tagop, args.from_date, args.to_date)
+    elif args.scope == "passescost":
+        passescost(args.stationop, args.tagop, args.from_date, args.to_date, args.opid)
+    elif args.scope == "chargesby":
+        chargesby(args.opid, args.from_date, args.to_date)
+    elif args.scope == "admin":
+        if args.username and args.passw:
+            admin_usermod(args.username, args.passw)
+        elif args.source:
+            admin_addpasses(args.source)
+        else:
+            print("Διαθέσιμες ενέργειες admin:\n")
+            print("- `--usermod` και `--username` και `--passw` για δημιουργία/τροποποίηση χρήστη.")
+            print("- `addpasses` και `--source` για εισαγωγή δεδομένων από CSV αρχείο.")
+            print("--users` για εμφάνιση όλων των χρηστών.")
+            admin_users()
+
+if __name__ == "__main__":
+    main()

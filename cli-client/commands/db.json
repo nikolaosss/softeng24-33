@@ -1,0 +1,16 @@
+{
+  "admin": {
+    "healthcheck": { "status": "ok" },
+    "resetpasses": { "message": "Passes have been reset successfully." },
+    "resetstations": { "message": "Stations Reset Successfully" }
+  },
+  "tollStationPasses": [
+    {
+      "station": "ST001",
+      "from": "20230101",
+      "to": "20231231",
+      "format": "json",
+      "data": [ { "id": 1, "pass": "A123" }, { "id": 2, "pass": "B456" } ]
+    }
+  ]
+}
