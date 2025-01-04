@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const healthcheckRoute = require('./routes/healthcheckRoute');
 const resetStationsRoute = require('./routes/resetStationsRoute');
@@ -11,6 +12,7 @@ const passAnalysisRoute = require('./routes/passAnalysisRoute');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors())
 
 app.use('/admin', healthcheckRoute);
 app.use('/admin', resetStationsRoute);
