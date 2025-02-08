@@ -28,11 +28,9 @@ exports.addPasses = async (req, res) => {
     `;
     await dbConnection.query(loadDataQuery, [csvFilePath]);
 
-    // Call the stored procedure
-    const callProcedureQuery = `CALL processPasses()`;
-    await dbConnection.query(callProcedureQuery);
+    //const callProcedureQuery = `CALL processPasses()`;
+    //await dbConnection.query(callProcedureQuery);
 
-    // Respond with success
     res.status(200).json({ status: 'OK' });
   } catch (error) {
     console.error('Error adding passes:', error.message);

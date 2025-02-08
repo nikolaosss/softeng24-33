@@ -1,4 +1,4 @@
-const passAnalysisService = require('../services/passAnalysisService');
+const passAnalysisService = require('../back-end/services/passAnalysisService');
 
 exports.getPassAnalysis = async (req, res) => {
   const { stationOpID, tagOpID, date_from, date_to } = req.params;

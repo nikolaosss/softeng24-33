@@ -1,4 +1,4 @@
-const addPassesService = require('../services/addPassesService');
+const addPassesService = require('../back-end/services/addPassesService');
 
 exports.addPasses = async (req, res) => {
   try {

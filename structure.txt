@@ -1,9 +1,0 @@
-backend/
-├── app.js
-├── routes/
-├── controllers/
-├── services/
-├── models/
-│   └── db.js
-├── schema.sql
-└── data.sql

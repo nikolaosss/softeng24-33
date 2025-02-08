@@ -1,4 +1,4 @@
-const healthcheckService = require('../services/healthcheckService');
+const healthcheckService = require('../back-end/services/healthcheckService');
 
 exports.check = async (req, res) => {
   try {

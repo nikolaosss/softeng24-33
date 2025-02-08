@@ -12,7 +12,7 @@ function DataAnalysis() {
       console.log('Fetching health check status...');
 
       // Call the backend API on port 3000
-      const response = await fetch('http://localhost:3000/admin/healthcheck'); // Update the URL with the correct backend server
+      const response = await fetch('http://localhost:3001/admin/healthcheck'); // Update the URL with the correct backend server
 
       // Log the raw response object
       console.log('Raw Response:', response);
