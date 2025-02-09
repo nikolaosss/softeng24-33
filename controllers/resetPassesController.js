@@ -1,4 +1,4 @@
-const resetPassesService = require('../services/resetPassesService');
+const resetPassesService = require('../back-end/services/resetPassesService');
 
 exports.resetPasses = async (req, res) => {
   try {

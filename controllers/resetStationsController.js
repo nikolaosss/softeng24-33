@@ -1,4 +1,4 @@
-const resetStationsService = require('../services/resetStationsService');
+const resetStationsService = require('../back-end/services/resetStationsService');
 
 exports.resetStations = async (req, res) => {
   try {
