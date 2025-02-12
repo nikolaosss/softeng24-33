@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,142 +6,93 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import axios from 'axios';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  // State για φίλτρα
-  const [tollStationID, setTollStationID] = useState('');
-  const [dateFrom, setDateFrom] = useState('');
-  const [dateTo, setDateTo] = useState('');
-  const [data, setData] = useState([]);
-
-  // Δείγμα δεδομένων σταθμών διοδίων
-  const tollStations = [
-    { id: 'NAO07', name: 'NAO07' },
-  ];
-
-  // Λειτουργία για κλήση API
-  const fetchData = async () => {
-    try {
-      // Remove dashes from the dates
-      const formattedDateFrom = dateFrom.replace(/-/g, ''); // Converts "2023-01-01" to "20230101"
-      const formattedDateTo = dateTo.replace(/-/g, ''); // Converts "2023-01-31" to "20230131"
-  
-      const response = await axios.get(
-        `http://localhost:3001/api/tollStationPasses/${tollStationID}/${formattedDateFrom}/${formattedDateTo}`
-      );
-      const rawData = response.data.passList;
-  
-      // Group data by date
-      const groupedData = rawData.reduce((acc, pass) => {
-        const date = pass.timestamp.split('T')[0]; // Extract date from timestamp
-        acc[date] = (acc[date] || 0) + 1;
-        return acc;
-      }, {});
-  
-      // Convert grouped data to chart-compatible format
-      const chartData = Object.entries(groupedData).map(([date, count]) => ({
-        date,
-        count,
-      }));
-  
-      setData(chartData);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+  const backgroundStyle = {
+    backgroundImage: 'url("https://i.redd.it/q95kad030uv71.jpg")', // Replace with your image URL
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh',
+    width: '100%',
+    overflow: 'auto',
   };
-  
-  return (
-    <div>
-      {/* AppBar για Navigation */}
-      <AppBar position="static" style={{ marginBottom: '20px' }}>
-        <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
-            CONNECT.OLL
-          </Typography>
-          <Button color="inherit" onClick={() => navigate('/')}>Home</Button>
-          <Button color="inherit" onClick={() => navigate('/view-debts')}>View Debts</Button>
-          <Button color="inherit" onClick={() => navigate('/data-analysis')}>Data Analysis</Button>
-        </Toolbar>
-      </AppBar>
 
-      {/* Φίλτρα */}
+  return (
+    <div style={backgroundStyle}>
+      {/* Main Content */}
       <Grid container spacing={3} style={{ padding: '20px' }}>
+        {/* Welcome Section */}
         <Grid item xs={12}>
-          <Paper elevation={3} style={{ padding: '20px' }}>
-            <Typography variant="h5" gutterBottom>
-              Select Filters
+          <Paper
+            elevation={3}
+            style={{
+              padding: '20px',
+              textAlign: 'center',
+              backgroundColor: 'rgba(255, 255, 255, 0.9)', // Transparent white
+            }}
+          >
+            <Typography variant="h4" gutterBottom>
+              Welcome to the Toll Management System
             </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <TextField
-                  select
-                  label="Toll Station"
-                  value={tollStationID}
-                  onChange={(e) => setTollStationID(e.target.value)}
-                  fullWidth
-                >
-                  {tollStations.map((station) => (
-                    <MenuItem key={station.id} value={station.id}>
-                      {station.name}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  label="Date From"
-                  type="date"
-                  value={dateFrom}
-                  onChange={(e) => setDateFrom(e.target.value)}
-                  InputLabelProps={{ shrink: true }}
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  label="Date To"
-                  type="date"
-                  value={dateTo}
-                  onChange={(e) => setDateTo(e.target.value)}
-                  InputLabelProps={{ shrink: true }}
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-            <Button
-              variant="contained"
-              color="primary"
-              style={{ marginTop: '20px' }}
-              onClick={fetchData}
-            >
-              Fetch Data
-            </Button>
+            <Typography variant="body1">
+              Manage toll interoperability, debts, and analyze data effectively.
+            </Typography>
           </Paper>
         </Grid>
-
-        {/* Γράφημα */}
-        <Grid item xs={12}>
-          <Paper elevation={3} style={{ padding: '20px' }}>
-            <Typography variant="h5" gutterBottom>
-              Number of Passes per Day
-            </Typography>
-            <ResponsiveContainer width="100%" height={400}>
-              <LineChart data={data}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="count" stroke="#8884d8" activeDot={{ r: 8 }} />
-              </LineChart>
-            </ResponsiveContainer>
-          </Paper>
+        {/* Navigation Options */}
+        <Grid item xs={6}>
+          <Card onClick={() => navigate('/view-debts')} style={{ cursor: 'pointer',       backgroundColor: 'rgba(255, 255, 255, 0.9)', // Transparent white 
+          }}>
+            <CardMedia
+              component="img"
+              height="140"
+              image="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bW9uZXl8ZW58MHx8MHx8fDA%3D"
+              alt="View Debts"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                View Debts
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Check and manage outstanding debts between operators.
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={6}>
+          <Card onClick={() => navigate('/data-analysis')} style={{ cursor: 'pointer',              backgroundColor: 'rgba(255, 255, 255, 0.9)', // Transparent white
+             }}>
+            <div style={{
+              height: '140px',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+              <CardMedia
+                component="img"
+                style={{
+                  objectFit: 'cover',
+                  width: '180%',
+                }}
+                image="https://images.squarespace-cdn.com/content/v1/55b6a6dce4b089e11621d3ed/9ad7e5df-ee31-4764-81ad-26bef16ff3c3/Line+graph+without+gridlines.png"
+                alt="Data Analysis"
+              />
+            </div>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Data Analysis
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Visualize and analyze toll data for insights and reporting.
+              </Typography>
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     </div>

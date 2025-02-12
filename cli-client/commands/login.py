@@ -1,13 +1,28 @@
 import requests
+import os
+
+BASE_URL = "http://localhost:3001/api"
+TOKEN_FILE = "token.txt"  # Τοπική αποθήκευση
 
 def login(username, password):
-    url = "http://localhost:5000/api/login"
-    payload = {"username": username, "password": password}
+    url = f"{BASE_URL}/login"
+    data = {"username": username, "password": password}  # Βεβαιώσου ότι το API περιμένει αυτά τα keys
+
     try:
-        response = requests.post(url, json=payload)
-        if response.status_code == 200:
-            print("Login successful:", response.json())
+        response = requests.post(url, json=data)
+        print("Response Status Code:", response.status_code)  # Debug
+        print("Response Body:", response.text)  # Debug
+
+        response.raise_for_status()  # Ρίχνει σφάλμα αν το request δεν είναι 200 OK
+
+        result = response.json()
+        token = result.get("token")
+        if token:
+            with open(TOKEN_FILE, "w") as f:
+                f.write(token)
+            print("Login successful. Token stored.")
         else:
-            print("Error:", response.status_code, response.text)
+            print("Login failed: No token received.")
+
     except requests.exceptions.RequestException as e:
-        print("Connection error:", str(e))
+        print(f"Error during login: {e}")

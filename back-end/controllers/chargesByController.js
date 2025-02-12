@@ -1,4 +1,4 @@
-const chargesByService = require('../back-end/services/chargesByService');
+const chargesByService = require('../services/chargesByService');
 
 exports.getChargesBy = async (req, res) => {
   const { tollOpID, date_from, date_to } = req.params;

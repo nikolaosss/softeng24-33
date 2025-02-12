@@ -1,6 +1,6 @@
 const dbConnection = require('../models/db');
 
-exports.fetchPasses = async (tollStationID, date_from, date_to) => {
+exports.fetchPasses = async (tollStationID, date_from, date_to, format = 'json') => {
   const query = `
   SELECT 
     p.passes_id AS passID,
@@ -21,8 +21,7 @@ exports.fetchPasses = async (tollStationID, date_from, date_to) => {
   WHERE 
     p.fk_toll_station_id = ?
     AND DATE(p.timestamp) BETWEEN ? AND ?;
-`;
-
+  `;
 
   const [rows] = await dbConnection.execute(query, [tollStationID, tollStationID, date_from, date_to]);
 
@@ -48,7 +47,7 @@ exports.fetchPasses = async (tollStationID, date_from, date_to) => {
 
   const [summary] = await dbConnection.execute(summaryQuery, [tollStationID, date_from, date_to]);
 
-  return {
+  const responseData = {
     stationID: tollStationID,
     stationOperator: rows.length > 0 ? rows[0].tagProvider : null,
     requestTimestamp: new Date().toISOString(),
@@ -57,4 +56,20 @@ exports.fetchPasses = async (tollStationID, date_from, date_to) => {
     nPasses: summary[0].nPasses,
     passList: passList,
   };
+
+  if (format === 'csv') {
+    const headers = Object.keys(responseData).filter(key => key !== 'passList');
+    let csvOutput = headers.join(',') + '\n';
+    csvOutput += headers.map(key => responseData[key]).join(',') + '\n';
+
+    if (passList.length > 0) {
+      const passHeaders = Object.keys(passList[0]);
+      csvOutput += '\n' + passHeaders.join(',') + '\n';
+      csvOutput += passList.map(pass => passHeaders.map(h => pass[h]).join(',')).join('\n');
+    }
+
+    return { csv: csvOutput };
+  }
+
+  return responseData;
 };

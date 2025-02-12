@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+import os
 
 import argparse
 from commands.healthcheck import healthcheck
@@ -12,10 +13,10 @@ from commands.passescost import passescost
 from commands.admin_addpasses import admin_addpasses
 from commands.admin_usermod import admin_usermod
 from commands.passanalysis import passanalysis
-from commands.admin_users import admin_users
+from commands.admin_users import admin_users # type: ignore
 
 # Η URL του mock API
-BASE_URL = "http://localhost:5000/api"
+BASE_URL = "http://localhost:3001/api"
 
 # Περιγραφές παραμέτρων ανά scope
 HELP_DETAILS = {
@@ -30,6 +31,17 @@ HELP_DETAILS = {
     "chargesby": "--opid <ID> (απαραίτητο), --from <YYYYMMDD> (προαιρετικό), --to <YYYYMMDD> (προαιρετικό).",
     "admin": "--username <USERNAME> και --passw <PASSWORD> για τροποποίηση χρήστη ή --source <CSV FILE> για εισαγωγή δεδομένων ή Χωρίς παραμέτρους για λίστα χρηστών."
 }
+
+TOKEN_FILE = "token.txt"  # Τοπική αποθήκευση
+
+
+def get_token():
+    """Διαβάζει το αποθηκευμένο token από το αρχείο."""
+    if os.path.exists(TOKEN_FILE):
+        with open(TOKEN_FILE, "r") as f:
+            return f.read().strip()
+    return None
+
 
 def display_scope_help(scope):
     """Εμφάνιση βοήθειας για συγκεκριμένο scope."""
@@ -51,6 +63,9 @@ def main():
     parser.add_argument("--opid", help="Operator ID")
     parser.add_argument("--source", help="Source CSV file")
     parser.add_argument("--format", choices=["json", "csv"], default="csv", help="Output format")
+    parser.add_argument("--usermod", action="store_true", help="Modify or create a user")
+    parser.add_argument("--users", action="store_true", help="Display user list")
+    parser.add_argument("--addpasses", action="store_true", help="Add passes from CSV file")
 
     args = parser.parse_args()
 
@@ -99,8 +114,10 @@ def main():
     elif args.scope == "chargesby":
         chargesby(args.opid, args.from_date, args.to_date)
     elif args.scope == "admin":
-        if args.username and args.passw:
+        if args.usermod and args.username and args.passw:
             admin_usermod(args.username, args.passw)
+        elif args.users:
+            admin_users()
         elif args.source:
             admin_addpasses(args.source)
         else:

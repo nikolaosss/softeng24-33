@@ -1,4 +1,4 @@
-const passesCostService = require('../back-end/services/passesCostService');
+const passesCostService = require('../services/passesCostService');
 
 exports.getPassesCost = async (req, res) => {
   const { tollOpID, tagOpID, date_from, date_to } = req.params;
