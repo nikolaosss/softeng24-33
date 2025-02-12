@@ -15,7 +15,7 @@ def admin_usermod(username, passw):
     headers = {"x-observatory-auth": token}
     data = {"username": username, "passw": passw}
 
-    response = requests.post(url, headers=headers, json=data)
+    response = requests.post(url, headers=headers, json=data, verify=False)
 
     if response.status_code == 200:
         print(f"Ο χρήστης '{username}' τροποποιήθηκε/δημιουργήθηκε με επιτυχία.")

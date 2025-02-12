@@ -23,7 +23,7 @@ def healthcheck():
     }
 
     try:
-        response = requests.get(url, headers=headers)  # ✅ Στέλνουμε το request με το token
+        response = requests.get(url, headers=headers,verify=False)  # ✅ Στέλνουμε το request με το token
         if response.status_code == 200:
             print("Healthcheck OK:", response.json())
         else:

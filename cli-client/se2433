@@ -14,6 +14,10 @@ from commands.admin_addpasses import admin_addpasses
 from commands.admin_usermod import admin_usermod
 from commands.passanalysis import passanalysis
 from commands.admin_users import admin_users # type: ignore
+import urllib3
+
+# Απενεργοποίηση των προειδοποιήσεων SSL
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Η URL του mock API
 BASE_URL = "https://localhost:3001/api"

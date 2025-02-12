@@ -12,7 +12,7 @@ def passescost(stationop, tagop, from_date, to_date):
     headers = {"x-observatory-auth": token}
 
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, verify=False)
         if response.status_code == 200:
             print("Passes Cost:", response.json())
         else:

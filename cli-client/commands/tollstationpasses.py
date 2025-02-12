@@ -12,7 +12,7 @@ def tollstationpasses(station, from_date, to_date, format):
     headers = {"x-observatory-auth": token}
 
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, verify=False)
 
         if response.status_code == 200:
             if format.lower() == "csv":

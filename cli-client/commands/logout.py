@@ -3,6 +3,7 @@ import os
 from commands.auth import get_token  # Εισάγουμε τη συνάρτηση για το token
 
 TOKEN_FILE = "token.txt"
+PATH = "localhost.pem"
 
 def logout():
     """ Εκτελεί logout και διαγράφει το αποθηκευμένο token """
@@ -18,8 +19,8 @@ def logout():
     }
 
     try:
-        response = requests.post(url, headers=headers)
-        
+        response = requests.post(url, headers=headers, verify=False)
+
         if response.status_code == 200:
             print("Logout successful")
             os.remove(TOKEN_FILE)  

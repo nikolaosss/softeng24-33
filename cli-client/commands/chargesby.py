@@ -25,7 +25,7 @@ def chargesby(opid, from_date, to_date):
     headers = {"x-observatory-auth": token}
 
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers,verify=False)
         response.raise_for_status()
         print(response.json())  # Εμφάνιση αποτελεσμάτων
 

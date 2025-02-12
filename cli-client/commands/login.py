@@ -9,9 +9,8 @@ def login(username, password):
     data = {"username": username, "password": password}  # Βεβαιώσου ότι το API περιμένει αυτά τα keys
 
     try:
-        response = requests.post(url, json=data)
-        print("Response Status Code:", response.status_code)  # Debug
-        print("Response Body:", response.text)  # Debug
+        response = requests.post(url, json=data, verify=False)
+
 
         response.raise_for_status()  # Ρίχνει σφάλμα αν το request δεν είναι 200 OK
 

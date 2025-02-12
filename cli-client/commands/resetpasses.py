@@ -12,7 +12,7 @@ def resetpasses():
     headers = {"x-observatory-auth": token}
 
     try:
-        response = requests.post(url, headers=headers)
+        response = requests.post(url, headers=headers, verify=False)
         if response.status_code == 200:
             print("Passes have been reset successfully.")
         else:

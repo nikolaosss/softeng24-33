@@ -17,7 +17,7 @@ def admin_addpasses(source):
         with open(source, 'rb') as file:  # ✅ Άνοιγμα αρχείου σε binary mode
             files = {'csvFile': file}  # ✅ Multipart form-data (το key πρέπει να ταιριάζει με το backend)
 
-            response = requests.post(url, headers=headers, files=files)  # ✅ Χρήση files αντί data
+            response = requests.post(url, headers=headers, files=files, verify=False)  # ✅ Χρήση files αντί data
             
             if response.status_code == 200:
                 print("Passes added successfully")

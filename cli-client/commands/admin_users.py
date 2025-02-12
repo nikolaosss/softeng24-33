@@ -12,7 +12,7 @@ def admin_users():
         return
 
     headers = {"x-observatory-auth": token}
-    response = requests.get(f"{BASE_URL}/admin/users", headers=headers)
+    response = requests.get(f"{BASE_URL}/admin/users", headers=headers, verify=False)
     
     if response.status_code == 200:
         print("Χρήστες:", response.json())
