@@ -22,6 +22,11 @@ React (for the frontend)
       -cd softend24-33
 --Install dependencies:
       -npm install
+--To run https:
+      -Download mkcertfrom GitHub: https://github.com/FiloSottile/mkcert/releases
+      -Unzip and place mkcert.exe inside to C:\Windows\System32
+      -From Windows Powershell(as administrator) run -- mkcert -install and then --mkcert localhost
+      -Place the two newly created files, in the directory you are running the back-end server
 --Create database:
       -node createdatabase.js(with your username and password)
 --Start the local server:
