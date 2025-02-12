@@ -5,3 +5,25 @@ Template repository, used for NTUA/ECE Software Engineering, 2024-2025
 Το αρχείο αυτό περιέχει οδηγίες για το στήσιμο του git repository που θα
 χρησιμοποιήσετε.  Στο τέλος, θα το αντικαταστήσετε με το `README.md` που
 θα περιγράφει το δικό σας project.
+
+# SoftEng24-33 - Connect.oll
+
+Before setting up the project, ensure you have the following installed:
+
+MySQL (for database management)
+Node.js (for running the backend)
+Java (if any Java-based dependencies are required)
+Python (for CLI scripts and additional utilities)
+Postman (optional, for API testing)
+React (for the frontend)
+
+--Clone the repository: 
+      -git clone https://github.com/ntua/softeng24-33.git
+      -cd softend24-33
+--Install dependencies:
+      -npm install
+--Create database:
+      -node createdatabase.js(with your username and password)
+--Start the local server:
+      -node app.js(back-end server) Server will be running at https://localhost:3001/api/
+      -npm start(front-end server) Server will be running at http://localhost:9600/api/
