@@ -1,0 +1,1253 @@
+{
+	"info": {
+		"_postman_id": "2904df8b-381b-4910-b429-f6659a8d13af",
+		"name": "API documentation",
+		"description": "# 📄 Get started here\n\nThis template contains a boilerplate for documentation that you can quickly customize and reuse.\n\n## 🔖 How to use this template\n\n- Replace the content given brackets (()) with your API's details.\n- Tips are formatted in `codespan` - feel free to read and remove them.\n    \n\n---\n\n`Start with a brief overview of what your API offers.`\n\nThe ((product name)) provides many API products, tools, and resources that enable you to ((add product value here)).\n\n`You can also list the APIs you offer, link to the relevant pages, or do both in this section.`\n\n## **Getting started guide**\n\n`List the steps or points required to start using your APIs. Make sure to cover everything required to reach success with your API as quickly as possible.`\n\nTo start using the ((add APIs here)), you need to -\n\n`The points given below are from The Postman API's documentation. You can reference it to write your own getting started guide.`\n\n- You must use a valid API Key to send requests to the API endpoints. You can get your API key from Postman's [integrations dashboard](https://go.postman.co/settings/me/api-keys).\n- The API has [rate and usage limits](https://learning.postman.com/docs/developer/postman-api/postman-api-rate-limits/).\n- The API only responds to HTTPS-secured communications. Any requests sent via HTTP return an HTTP 301 redirect to the corresponding HTTPS resources.\n- The API returns request responses in JSON format. When an API request returns an error, it is sent in the JSON response as an error key.\n    \n\n## Authentication\n\n`Add details on the authorization keys/tokens required, steps that cover how to get them, and the relevant error codes.`\n\nThe ((product name)) API uses ((add your API's authorization type)) for authentication.\n\n`The details given below are from the Postman API's documentation. You can reference it to write your own authentication section.`\n\nPostman uses API keys for authentication. You can generate a Postman API key in the [API keys](https://postman.postman.co/settings/me/api-keys) section of your Postman account settings.\n\nYou must include an API key in each request to the Postman API with the X-Api-Key request header.\n\n### Authentication error response\n\nIf an API key is missing, malformed, or invalid, you will receive an HTTP 401 Unauthorized response code.\n\n## Rate and usage limits\n\n`Use this section to cover your APIs' terms of use. Include API limits, constraints, and relevant error codes, so consumers understand the permitted API usage and practices.`\n\n`The example given below is from The Postman API's documentation. Use it as a reference to write your APIs' terms of use.`\n\nAPI access rate limits apply at a per-API key basis in unit time. The limit is 300 requests per minute. Also, depending on your plan, you may have usage limits. If you exceed either limit, your request will return an HTTP 429 Too Many Requests status code.\n\nEach API response returns the following set of headers to help you identify your use status:\n\n| Header | Description |\n| --- | --- |\n| `X-RateLimit-Limit` | The maximum number of requests that the consumer is permitted to make per minute. |\n| `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window. |\n| `X-RateLimit-Reset` | The time at which the current rate limit window resets in UTC epoch seconds. |\n\n### 503 response\n\nAn HTTP `503` response from our servers indicates there is an unexpected spike in API access traffic. The server is usually operational within the next five minutes. If the outage persists or you receive any other form of an HTTP `5XX` error, [contact support](https://support.postman.com/hc/en-us/requests/new/).\n\n### **Need some help?**\n\n`Add links that customers can refer to whenever they need help.`\n\nIn case you have questions, go through our tutorials ((link to your video or help documentation here)). Or visit our FAQ page ((link to the relevant page)).\n\nOr you can check out our community forum, there’s a good chance our community has an answer for you. Visit our developer forum ((link to developer forum)) to review topics, ask questions, and learn from others.\n\n`You can also document or add links to libraries, code examples, and other resources needed to make a request.`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40821534"
+	},
+	"item": [
+		{
+			"name": "Healthcheck",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-observatory-auth",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://localhost:3000/api/admin/healthcheck",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"healthcheck"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/admin/healthcheck",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"healthcheck"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"OK\",\r\n  \"dbconnection\": \"mysql://root@localhost/connect.oll\",\r\n  \"n_stations\": 253,\r\n  \"n_tags\": 50,\r\n  \"n_passes\": 1002\r\n}\r\n"
+				},
+				{
+					"name": "Failed Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/admin/healthcheck",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"healthcheck"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"failed\",\r\n  \"dbconnection\": \"mysql://root@localhost/connect.oll\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Reset Toll Stations",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-observatory-auth",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:3000/api/admin/resetstations",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"resetstations"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful Reset",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/admin/resetstations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"resetstations"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"OK\"\r\n}"
+				},
+				{
+					"name": "Reset Failed",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/admin/resetstations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"resetstations"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"failed\",\r\n  \"info\": \"File not found or query error\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Reset Passes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-observatory-auth",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:3000/api/admin/resetpasses",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"resetpasses"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful Reset",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/admin/resetpasses",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"resetpasses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"OK\"\r\n}\r\n"
+				},
+				{
+					"name": "Failed to Reset",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/admin/resetpasses",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"resetpasses"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"failed\",\r\n  \"info\": \"Database connection error\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Add passes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-observatory-auth",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csvFile",
+							"type": "file",
+							"src": "postman-cloud:///1efe95a7-9eb5-48d0-afa2-d8a3de520804"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:3000/api/admin/addpasses",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"addpasses"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful Import",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "csvFile",
+									"type": "file",
+									"src": "/C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/passes-sample.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://localhost:3000/api/admin/addpasses",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"addpasses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"OK\",\r\n  \"info\": \"Data successfully imported\"\r\n}\r\n"
+				},
+				{
+					"name": "No File Uploaded",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "csvFile",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "https://localhost:3000/api/admin/addpasses",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"addpasses"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"failed\",\r\n  \"info\": \"File not found or database error\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Toll Station Passes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-observatory-auth",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:3000/api/passesCost/:tollOpID/:tagOpID/:date_from/:date_to",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"passesCost",
+						":tollOpID",
+						":tagOpID",
+						":date_from",
+						":date_to"
+					],
+					"variable": [
+						{
+							"key": "tollOpID",
+							"value": ""
+						},
+						{
+							"key": "tagOpID",
+							"value": ""
+						},
+						{
+							"key": "date_from",
+							"value": ""
+						},
+						{
+							"key": "date_to",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/tollStationPasses/NAO04/20220309/20220320?format=json",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tollStationPasses",
+								"NAO04",
+								"20220309",
+								"20220320"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'none'"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "182"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Jan 2025 19:47:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"stationID\": \"AM01\",\n    \"stationOperator\": \"aegeanmotorway\",\n    \"requestTimestamp\": \"2025-01-06T19:54:55.882Z\",\n    \"periodFrom\": \"20220101\",\n    \"periodTo\": \"20220102\",\n    \"nPasses\": 6,\n    \"passList\": [\n        {\n            \"passIndex\": 1,\n            \"passID\": 19398,\n            \"timestamp\": \"2022-01-01T07:44:00.000Z\",\n            \"tagID\": \"NAOP0J43D5\",\n            \"tagProvider\": \"aegeanmotorway\",\n            \"passType\": \"home\",\n            \"passCharge\": 2\n        },\n        {\n            \"passIndex\": 2,\n            \"passID\": 19467,\n            \"timestamp\": \"2022-01-02T09:26:00.000Z\",\n            \"tagID\": \"AMHJ7XVG0\",\n            \"tagProvider\": \"aegeanmotorway\",\n            \"passType\": \"home\",\n            \"passCharge\": 2\n        },\n        {\n            \"passIndex\": 3,\n            \"passID\": 19482,\n            \"timestamp\": \"2022-01-02T13:51:00.000Z\",\n            \"tagID\": \"AMLJH75LX\",\n            \"tagProvider\": \"aegeanmotorway\",\n            \"passType\": \"home\",\n            \"passCharge\": 2\n        },\n        {\n            \"passIndex\": 4,\n            \"passID\": 20400,\n            \"timestamp\": \"2022-01-01T07:44:00.000Z\",\n            \"tagID\": \"NAOP0J43D5\",\n            \"tagProvider\": \"aegeanmotorway\",\n            \"passType\": \"home\",\n            \"passCharge\": 2\n        },\n        {\n            \"passIndex\": 5,\n            \"passID\": 20469,\n            \"timestamp\": \"2022-01-02T09:26:00.000Z\",\n            \"tagID\": \"AMHJ7XVG0\",\n            \"tagProvider\": \"aegeanmotorway\",\n            \"passType\": \"home\",\n            \"passCharge\": 2\n        },\n        {\n            \"passIndex\": 6,\n            \"passID\": 20484,\n            \"timestamp\": \"2022-01-02T13:51:00.000Z\",\n            \"tagID\": \"AMLJH75LX\",\n            \"tagProvider\": \"aegeanmotorway\",\n            \"passType\": \"home\",\n            \"passCharge\": 2\n        }\n    ]\n}"
+				},
+				{
+					"name": "No Passes Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/tollStationPasses/AM01/20240101/20250102",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tollStationPasses",
+								"AM01",
+								"20240101",
+								"20250102"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"stationID\": \"AM01\",\r\n    \"stationOperator\": null,\r\n    \"requestTimestamp\": \"2025-01-06T19:56:45.067Z\",\r\n    \"periodFrom\": \"20240101\",\r\n    \"periodTo\": \"20250102\",\r\n    \"nPasses\": 0,\r\n    \"passList\": []\r\n}"
+				},
+				{
+					"name": "Invalid Station ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/tollStationPasses/EG01/2024-01-01/2024-01-31",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tollStationPasses",
+								"EG01",
+								"2024-01-01",
+								"2024-01-31"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"failed\",\r\n  \"info\": \"Invalid station ID or no data found for the given period.\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Pass Analysis",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-observatory-auth",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:3000/api/passAnalysis/:stationOpID/:tagOpID/:date_from/:date_to",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"passAnalysis",
+						":stationOpID",
+						":tagOpID",
+						":date_from",
+						":date_to"
+					],
+					"variable": [
+						{
+							"key": "stationOpID",
+							"value": ""
+						},
+						{
+							"key": "tagOpID",
+							"value": ""
+						},
+						{
+							"key": "date_from",
+							"value": ""
+						},
+						{
+							"key": "date_to",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/passAnalysis/AM/AM/2022-01-01/2022-01-02",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"passAnalysis",
+								"AM",
+								"AM",
+								"2022-01-01",
+								"2022-01-02"
+							],
+							"query": [
+								{
+									"key": "x-observatory-auth",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"stationOpID\": \"AM\",\r\n    \"tagOpID\": \"AM\",\r\n    \"requestTimestamp\": \"2025-01-06T20:30:20.685Z\",\r\n    \"periodFrom\": \"2022-01-01\",\r\n    \"periodTo\": \"2022-01-02\",\r\n    \"nPasses\": 24,\r\n    \"passList\": [\r\n        {\r\n            \"passIndex\": 1,\r\n            \"passID\": 19467,\r\n            \"stationID\": \"AM01\",\r\n            \"timestamp\": \"2022-01-02T09:26:00.000Z\",\r\n            \"tagID\": \"AMHJ7XVG0\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 2,\r\n            \"passID\": 19482,\r\n            \"stationID\": \"AM01\",\r\n            \"timestamp\": \"2022-01-02T13:51:00.000Z\",\r\n            \"tagID\": \"AMLJH75LX\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 3,\r\n            \"passID\": 20469,\r\n            \"stationID\": \"AM01\",\r\n            \"timestamp\": \"2022-01-02T09:26:00.000Z\",\r\n            \"tagID\": \"AMHJ7XVG0\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 4,\r\n            \"passID\": 20484,\r\n            \"stationID\": \"AM01\",\r\n            \"timestamp\": \"2022-01-02T13:51:00.000Z\",\r\n            \"tagID\": \"AMLJH75LX\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 5,\r\n            \"passID\": 19379,\r\n            \"stationID\": \"AM03\",\r\n            \"timestamp\": \"2021-12-31T23:39:00.000Z\",\r\n            \"tagID\": \"AMNT3W5UZ\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 6,\r\n            \"passID\": 19436,\r\n            \"stationID\": \"AM03\",\r\n            \"timestamp\": \"2022-01-02T00:24:00.000Z\",\r\n            \"tagID\": \"AMXAJI0Y6\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 7,\r\n            \"passID\": 20381,\r\n            \"stationID\": \"AM03\",\r\n            \"timestamp\": \"2021-12-31T23:39:00.000Z\",\r\n            \"tagID\": \"AMNT3W5UZ\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 8,\r\n            \"passID\": 20438,\r\n            \"stationID\": \"AM03\",\r\n            \"timestamp\": \"2022-01-02T00:24:00.000Z\",\r\n            \"tagID\": \"AMXAJI0Y6\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 9,\r\n            \"passID\": 19402,\r\n            \"stationID\": \"AM04\",\r\n            \"timestamp\": \"2022-01-01T10:26:00.000Z\",\r\n            \"tagID\": \"AMH9SDBDW\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 10,\r\n            \"passID\": 19432,\r\n            \"stationID\": \"AM04\",\r\n            \"timestamp\": \"2022-01-01T23:15:00.000Z\",\r\n            \"tagID\": \"AMLJH75LX\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 11,\r\n            \"passID\": 20404,\r\n            \"stationID\": \"AM04\",\r\n            \"timestamp\": \"2022-01-01T10:26:00.000Z\",\r\n            \"tagID\": \"AMH9SDBDW\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 12,\r\n            \"passID\": 20434,\r\n            \"stationID\": \"AM04\",\r\n            \"timestamp\": \"2022-01-01T23:15:00.000Z\",\r\n            \"tagID\": \"AMLJH75LX\",\r\n            \"passCharge\": 2\r\n        },\r\n        {\r\n            \"passIndex\": 13,\r\n            \"passID\": 19410,\r\n            \"stationID\": \"AM05\",\r\n            \"timestamp\": \"2022-01-01T14:51:00.000Z\",\r\n            \"tagID\": \"AMV3A3ZMF\",\r\n            \"passCharge\": 4\r\n        },\r\n        {\r\n            \"passIndex\": 14,\r\n            \"passID\": 19447,\r\n            \"stationID\": \"AM05\",\r\n            \"timestamp\": \"2022-01-02T04:31:00.000Z\",\r\n            \"tagID\": \"AMV3A3ZMF\",\r\n            \"passCharge\": 4\r\n        },\r\n        {\r\n            \"passIndex\": 15,\r\n            \"passID\": 20412,\r\n            \"stationID\": \"AM05\",\r\n            \"timestamp\": \"2022-01-01T14:51:00.000Z\",\r\n            \"tagID\": \"AMV3A3ZMF\",\r\n            \"passCharge\": 4\r\n        },\r\n        {\r\n            \"passIndex\": 16,\r\n            \"passID\": 20449,\r\n            \"stationID\": \"AM05\",\r\n            \"timestamp\": \"2022-01-02T04:31:00.000Z\",\r\n            \"tagID\": \"AMV3A3ZMF\",\r\n            \"passCharge\": 4\r\n        },\r\n        {\r\n            \"passIndex\": 17,\r\n            \"passID\": 19396,\r\n            \"stationID\": \"AM06\",\r\n            \"timestamp\": \"2022-01-01T07:11:00.000Z\",\r\n            \"tagID\": \"AMLJH75LX\",\r\n            \"passCharge\": 4\r\n        },\r\n        {\r\n            \"passIndex\": 18,\r\n            \"passID\": 19456,\r\n            \"stationID\": \"AM06\",\r\n            \"timestamp\": \"2022-01-02T06:41:00.000Z\",\r\n            \"tagID\": \"AMXAJI0Y6\",\r\n            \"passCharge\": 4\r\n        },\r\n        {\r\n            \"passIndex\": 19,\r\n            \"passID\": 19466,\r\n            \"stationID\": \"AM06\",\r\n            \"timestamp\": \"2022-01-02T09:16:00.000Z\",\r\n            \"tagID\": \"AMLJH75LX\",\r\n            \"passCharge\": 4\r\n        },\r\n        {\r\n            \"passIndex\": 20,\r\n            \"passID\": 20398,\r\n            \"stationID\": \"AM06\",\r\n            \"timestamp\": \"2022-01-01T07:11:00.000Z\",\r\n            \"tagID\": \"AMLJH75LX\",\r\n            \"passCharge\": 4\r\n        },\r\n        {\r\n            \"passIndex\": 21,\r\n            \"passID\": 20458,\r\n            \"stationID\": \"AM06\",\r\n            \"timestamp\": \"2022-01-02T06:41:00.000Z\",\r\n            \"tagID\": \"AMXAJI0Y6\",\r\n            \"passCharge\": 4\r\n        },\r\n        {\r\n            \"passIndex\": 22,\r\n            \"passID\": 20468,\r\n            \"stationID\": \"AM06\",\r\n            \"timestamp\": \"2022-01-02T09:16:00.000Z\",\r\n            \"tagID\": \"AMLJH75LX\",\r\n            \"passCharge\": 4\r\n        },\r\n        {\r\n            \"passIndex\": 23,\r\n            \"passID\": 19441,\r\n            \"stationID\": \"AM10\",\r\n            \"timestamp\": \"2022-01-02T02:34:00.000Z\",\r\n            \"tagID\": \"AMXAJI0Y6\",\r\n            \"passCharge\": 3\r\n        },\r\n        {\r\n            \"passIndex\": 24,\r\n            \"passID\": 20443,\r\n            \"stationID\": \"AM10\",\r\n            \"timestamp\": \"2022-01-02T02:34:00.000Z\",\r\n            \"tagID\": \"AMXAJI0Y6\",\r\n            \"passCharge\": 3\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "No Passes Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/passAnalysis/AM/AM/2024-01-01/2025",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"passAnalysis",
+								"AM",
+								"AM",
+								"2024-01-01",
+								"2025"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"stationOpID\": \"AM\",\r\n    \"tagOpID\": \"AM\",\r\n    \"requestTimestamp\": \"2025-01-06T20:31:10.771Z\",\r\n    \"periodFrom\": \"2024-01-01\",\r\n    \"periodTo\": \"2025\",\r\n    \"nPasses\": 0,\r\n    \"passList\": []\r\n}"
+				},
+				{
+					"name": "Invalid Input",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/passAnalysis/:stationOpID/:tagOpID/:date_from/:date_to",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"passAnalysis",
+								":stationOpID",
+								":tagOpID",
+								":date_from",
+								":date_to"
+							],
+							"variable": [
+								{
+									"key": "stationOpID",
+									"value": ""
+								},
+								{
+									"key": "tagOpID",
+									"value": ""
+								},
+								{
+									"key": "date_from",
+									"value": ""
+								},
+								{
+									"key": "date_to",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"failed\",\r\n  \"info\": \"Invalid input\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Passes Cost",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-observatory-auth",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:3000/api/passesCost/:tollOpID/:tagOpID/:date_from/:date_to",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"passesCost",
+						":tollOpID",
+						":tagOpID",
+						":date_from",
+						":date_to"
+					],
+					"variable": [
+						{
+							"key": "tollOpID",
+							"value": ""
+						},
+						{
+							"key": "tagOpID",
+							"value": ""
+						},
+						{
+							"key": "date_from",
+							"value": ""
+						},
+						{
+							"key": "date_to",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/passesCost/AM/EG/2022-01-01/2022-01-02",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"passesCost",
+								"AM",
+								"EG",
+								"2022-01-01",
+								"2022-01-02"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"tollOpID\": \"AM\",\r\n    \"tagOpID\": \"EG\",\r\n    \"requestTimestamp\": \"2025-01-06T20:09:06.676Z\",\r\n    \"periodFrom\": \"2022-01-01\",\r\n    \"periodTo\": \"2022-01-02\",\r\n    \"nPasses\": 6,\r\n    \"passesCost\": \"20\"\r\n}"
+				},
+				{
+					"name": "No Passes Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/passesCost/AM/EG/2023-01-01/2024-01-02",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"passesCost",
+								"AM",
+								"EG",
+								"2023-01-01",
+								"2024-01-02"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"tollOpID\": \"AM\",\r\n    \"tagOpID\": \"EG\",\r\n    \"requestTimestamp\": \"2025-01-06T20:09:53.835Z\",\r\n    \"periodFrom\": \"2023-01-01\",\r\n    \"periodTo\": \"2024-01-02\",\r\n    \"nPasses\": 0,\r\n    \"passesCost\": null\r\n}"
+				},
+				{
+					"name": "Invalid Input",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/passesCost/AMaefa/EG/2023-01-01/2024",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"passesCost",
+								"AMaefa",
+								"EG",
+								"2023-01-01",
+								"2024"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"failed\",\r\n  \"info\": \"Invalid operator ID or date range.\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Charges By",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-observatory-auth",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:3000/api/chargesBy/:tollOpID/:date_from/:date_to",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"chargesBy",
+						":tollOpID",
+						":date_from",
+						":date_to"
+					],
+					"variable": [
+						{
+							"key": "tollOpID",
+							"value": ""
+						},
+						{
+							"key": "date_from",
+							"value": ""
+						},
+						{
+							"key": "date_to",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/chargesBy/AM/2022-01-01/2022-01-02",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"chargesBy",
+								"AM",
+								"2022-01-01",
+								"2022-01-02"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"tollOpID\": \"AM\",\r\n    \"requestTimestamp\": \"2025-01-06T20:26:42.663Z\",\r\n    \"periodFrom\": \"2022-01-01\",\r\n    \"periodTo\": \"2022-01-02\",\r\n    \"vOpList\": [\r\n        {\r\n            \"visitingOpID\": \"AM\",\r\n            \"nPasses\": 24,\r\n            \"passesCost\": \"70\"\r\n        },\r\n        {\r\n            \"visitingOpID\": \"EG\",\r\n            \"nPasses\": 6,\r\n            \"passesCost\": \"20\"\r\n        },\r\n        {\r\n            \"visitingOpID\": \"NAO\",\r\n            \"nPasses\": 4,\r\n            \"passesCost\": \"12\"\r\n        },\r\n        {\r\n            \"visitingOpID\": \"NO\",\r\n            \"nPasses\": 2,\r\n            \"passesCost\": \"6\"\r\n        },\r\n        {\r\n            \"visitingOpID\": \"OO\",\r\n            \"nPasses\": 2,\r\n            \"passesCost\": \"6\"\r\n        }\r\n    ]\r\n}"
+				},
+				{
+					"name": "No Visiting Operators",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/chargesBy/AM/2024-01-01/2025-01-02",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"chargesBy",
+								"AM",
+								"2024-01-01",
+								"2025-01-02"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"tollOpID\": \"AM\",\r\n    \"requestTimestamp\": \"2025-01-06T20:27:21.110Z\",\r\n    \"periodFrom\": \"2024-01-01\",\r\n    \"periodTo\": \"2025-01-02\",\r\n    \"vOpList\": []\r\n}"
+				},
+				{
+					"name": "Invalid Input",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-observatory-auth",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:3000/api/chargesBy/AM/2024-01-01/2025",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"chargesBy",
+								"AM",
+								"2024-01-01",
+								"2025"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"status\": \"failed\",\r\n  \"info\": \"Invalid operator ID or date range.\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:3000/api/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "X-Observatory-Auth",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:3000/api/logout",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "debts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3000/api/debts/:operator/:fromDate/:toDate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"debts",
+						":operator",
+						":fromDate",
+						":toDate"
+					],
+					"variable": [
+						{
+							"key": "operator",
+							"value": ""
+						},
+						{
+							"key": "fromDate",
+							"value": ""
+						},
+						{
+							"key": "toDate",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay-debt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3000/api/pay-debt",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pay-debt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3000/api/transaction",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io"
+		}
+	]
+}
