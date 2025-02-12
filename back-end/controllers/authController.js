@@ -11,15 +11,15 @@ const login = async (req, res) => {
   }
 
   try {
+    // 🔹 Modified SQL query to LEFT JOIN in case there's no matching operator
     const [rows] = await dbConnection.execute(
       `SELECT users.idUSERS, users.username, users.password, users.privilege, 
               users.fk_operator_id, operators.operator_name
        FROM users
-       JOIN operators ON users.fk_operator_id = operators.id_operator
+       LEFT JOIN operators ON users.fk_operator_id = operators.id_operator
        WHERE users.username = ?`,
       [username]
     );
-
 
     if (rows.length === 0) {
       return res.status(401).json({ status: "failed", message: "Invalid username or password" });
@@ -31,24 +31,27 @@ const login = async (req, res) => {
       return res.status(401).json({ status: "failed", message: "Invalid username or password" });
     }
 
-    const token = jwt.sign(
-      {
-        id: user.idUSER,
-        username: user.username,
-        role: user.privilege,
-        operatorId: user.fk_operator_id,
-        operatorName: user.operator_name,
-      },
-      SECRET_KEY,
-      { expiresIn: "1h" }
-    );
+    // 🔹 Build JWT payload
+    const tokenPayload = {
+      id: user.idUSERS,
+      username: user.username,
+      role: user.privilege,
+    };
+
+    // 🔹 Only include operatorId/operatorName if the user is NOT an admin
+    if (user.fk_operator_id) {
+      tokenPayload.operatorId = user.fk_operator_id;
+      tokenPayload.operatorName = user.operator_name;
+    }
+
+    const token = jwt.sign(tokenPayload, SECRET_KEY, { expiresIn: "1h" });
 
     res.status(200).json({
       status: "success",
       token,
       role: user.privilege,
-      operatorId: user.fk_operator_id,
-      operatorName: user.operator_name,
+      operatorId: user.fk_operator_id || null, // If no operatorId, return null
+      operatorName: user.operator_name || null, // If no operatorName, return null
     });
   } catch (error) {
     console.error("Error during login:", error.message);
@@ -56,14 +59,9 @@ const login = async (req, res) => {
   }
 };
 
+// 🔹 Logout remains the same
 const logout = (req, res) => {
-  const token = req.headers["x-observatory-auth"];
-  if (!token) {
-    return res.status(400).json({ status: "failed", message: "Token is required for logout" });
-  }
-
   res.status(200).send({ status: "success", message: "Successfully logged out" });
 };
 
-// ✅ Εξασφαλίζουμε ότι εξάγουμε σωστά τις συναρτήσεις
 module.exports = { login, logout };

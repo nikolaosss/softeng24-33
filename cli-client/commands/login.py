@@ -1,7 +1,7 @@
 import requests
 import os
 
-BASE_URL = "http://localhost:3001/api"
+BASE_URL = "https://localhost:3001/api"
 TOKEN_FILE = "token.txt"  # Τοπική αποθήκευση
 
 def login(username, password):

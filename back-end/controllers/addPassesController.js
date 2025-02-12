@@ -9,8 +9,9 @@ exports.addPasses = async (req, res) => {
     }
 
     const destinationPath = path.join('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads', req.file.originalname);
-
+    console.log('Uploaded File Path:', req.file.path);
     fs.copyFileSync(req.file.path, destinationPath);
+    console.log('Destination Path:', destinationPath);
 
     fs.unlinkSync(req.file.path);
 

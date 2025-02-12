@@ -1,5 +1,5 @@
 se2433 logout
-se2433 login --username admin_user --passw adminpass
+se2433 login --username am_operator --passw password123
 se2433 healthcheck
 se2433 resetpasses
 se2433 healthcheck

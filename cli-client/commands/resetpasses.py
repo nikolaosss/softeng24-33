@@ -2,11 +2,11 @@ import requests
 from commands.auth import get_token
 
 def resetpasses():
-    url = "http://localhost:3001/api/admin/resetpasses"
+    url = "https://localhost:3001/api/admin/resetpasses"
     token = get_token()
 
     if not token:
-        print("⚠ Δεν βρέθηκε token. Κάνε login πρώτα!")
+        print("no token found, login first!")
         return
 
     headers = {"x-observatory-auth": token}
@@ -14,8 +14,8 @@ def resetpasses():
     try:
         response = requests.post(url, headers=headers)
         if response.status_code == 200:
-            print("✅ Passes have been reset successfully.")
+            print("Passes have been reset successfully.")
         else:
-            print(f"❌ Error {response.status_code}: {response.text}")
+            print(f"Error {response.status_code}: {response.text}")
     except requests.exceptions.RequestException as e:
-        print(f"❌ Connection error: {e}")
+        print(f"Connection error: {e}")

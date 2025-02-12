@@ -1,7 +1,7 @@
 import requests
 from commands.auth import get_token
 
-BASE_URL = "http://localhost:3001/api"
+BASE_URL = "https://localhost:3001/api"
 
 def admin_usermod(username, passw):
     """ Δημιουργεί ή τροποποιεί έναν χρήστη μέσω API """
@@ -9,7 +9,7 @@ def admin_usermod(username, passw):
     token = get_token()
     
     if not token:
-        print("⚠ Δεν βρέθηκε token. Κάνε login πρώτα!")
+        print("no token found, login first!")
         return
 
     headers = {"x-observatory-auth": token}
@@ -18,6 +18,6 @@ def admin_usermod(username, passw):
     response = requests.post(url, headers=headers, json=data)
 
     if response.status_code == 200:
-        print(f"✅ Ο χρήστης '{username}' τροποποιήθηκε/δημιουργήθηκε με επιτυχία.")
+        print(f"Ο χρήστης '{username}' τροποποιήθηκε/δημιουργήθηκε με επιτυχία.")
     else:
-        print(f"❌ Σφάλμα: {response.status_code}, {response.text}")
+        print(f"Σφάλμα: {response.status_code}, {response.text}")

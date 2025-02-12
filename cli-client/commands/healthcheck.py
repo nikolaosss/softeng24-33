@@ -11,11 +11,11 @@ def get_token():
     return None
 
 def healthcheck():
-    url = "http://localhost:3001/admin/healthcheck"
+    url = "https://localhost:3001/api/admin/healthcheck"
     token = get_token()  # Παίρνουμε το token
     
     if not token:
-        print("⚠ Δεν βρέθηκε token. Κάνε login πρώτα!")
+        print("no token found, login first!")
         return
 
     headers = {

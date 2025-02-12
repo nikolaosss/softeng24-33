@@ -10,7 +10,7 @@ const Login = ({ setIsAuthenticated }) => {
   const [gateOpen, setGateOpen] = useState(false); // State to control the bar animation
   const navigate = useNavigate();
 
-  const BASE_URL = "http://localhost:3001"; // URL του backend server
+  const BASE_URL = "https://localhost:3001"; // URL του backend server
 
   const handleLogin = async (e) => {
     e.preventDefault();

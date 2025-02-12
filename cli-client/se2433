@@ -16,7 +16,7 @@ from commands.passanalysis import passanalysis
 from commands.admin_users import admin_users # type: ignore
 
 # Η URL του mock API
-BASE_URL = "http://localhost:3001/api"
+BASE_URL = "https://localhost:3001/api"
 
 # Περιγραφές παραμέτρων ανά scope
 HELP_DETAILS = {
@@ -110,7 +110,7 @@ def main():
     elif args.scope == "passanalysis":
         passanalysis(args.stationop, args.tagop, args.from_date, args.to_date)
     elif args.scope == "passescost":
-        passescost(args.stationop, args.tagop, args.from_date, args.to_date, args.opid)
+        passescost(args.stationop, args.tagop, args.from_date, args.to_date)
     elif args.scope == "chargesby":
         chargesby(args.opid, args.from_date, args.to_date)
     elif args.scope == "admin":

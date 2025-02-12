@@ -8,11 +8,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema connect.oll
 -- -----------------------------------------------------
 
--- -----------------------------------------------------
--- Schema connect.oll
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `connect.oll` DEFAULT CHARACTER SET utf8 ;
-
 
 USE `connect.oll` ;
 
@@ -22,9 +18,8 @@ USE `connect.oll` ;
 CREATE TABLE IF NOT EXISTS `connect.oll`.`OPERATORS` (
   `id_operator` VARCHAR(45) NOT NULL,
   `operator_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_operator`))
-ENGINE = InnoDB;
-
+  PRIMARY KEY (`id_operator`)
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `connect.oll`.`TOLL_STATIONS`
@@ -49,9 +44,8 @@ CREATE TABLE IF NOT EXISTS `connect.oll`.`TOLL_STATIONS` (
     FOREIGN KEY (`fk_operator_of_station`)
     REFERENCES `connect.oll`.`OPERATORS` (`id_operator`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `connect.oll`.`PASSES`
@@ -76,9 +70,8 @@ CREATE TABLE IF NOT EXISTS `connect.oll`.`PASSES` (
     FOREIGN KEY (`fk_tag_home_id`)
     REFERENCES `connect.oll`.`OPERATORS` (`id_operator`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `connect.oll`.`USERS`
@@ -96,9 +89,8 @@ CREATE TABLE IF NOT EXISTS `connect.oll`.`USERS` (
     FOREIGN KEY (`fk_operator_id`)
     REFERENCES `connect.oll`.`OPERATORS` (`id_operator`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `connect.oll`.`DEBTS_PER_STATION`
@@ -119,9 +111,8 @@ CREATE TABLE IF NOT EXISTS `connect.oll`.`DEBTS_PER_STATION` (
     FOREIGN KEY (`TOLL_STATIONS_idTOLL_STATIONS`)
     REFERENCES `connect.oll`.`TOLL_STATIONS` (`TOLL_STATION_ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `connect.oll`.`PAYMENTS`
@@ -131,6 +122,7 @@ CREATE TABLE IF NOT EXISTS `connect.oll`.`PAYMENTS` (
   `operator_from` VARCHAR(45) NOT NULL,
   `operator_to` VARCHAR(45) NOT NULL,
   `poso` INT NOT NULL,
+  `payment_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Added column for payment timestamp
   PRIMARY KEY (`payment_id`),
   INDEX `fk_OPERATORS_has_OPERATORS_OPERATORS2_idx` (`operator_to` ASC) VISIBLE,
   INDEX `fk_OPERATORS_has_OPERATORS_OPERATORS1_idx` (`operator_from` ASC) VISIBLE,
@@ -144,9 +136,8 @@ CREATE TABLE IF NOT EXISTS `connect.oll`.`PAYMENTS` (
     FOREIGN KEY (`operator_to`)
     REFERENCES `connect.oll`.`OPERATORS` (`id_operator`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

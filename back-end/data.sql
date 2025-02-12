@@ -59,13 +59,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (OPERATORS_idOPERATORS, `TOLL_STATIONS_idTOLL_STATIONS`, ofeilh);
 
--- Load data into PAYMENTS table
-LOAD DATA INFILE "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\payments.csv"
-INTO TABLE `connect.oll`.`PAYMENTS`
-FIELDS TERMINATED BY ',' ENCLOSED BY '"' 
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(operator_from, operator_to, poso);
+
 
 -- Re-enable foreign key checks
 SET FOREIGN_KEY_CHECKS=1;
