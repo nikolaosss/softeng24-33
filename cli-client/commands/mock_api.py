@@ -82,32 +82,50 @@ def chargesby(opid, from_date, to_date):
         "charges": [{"id": 1, "amount": 50.00}, {"id": 2, "amount": 75.00}]
     })
 
-@app.route('/api/admin', methods=['GET', 'POST'])
-def admin():
-    """
-    Ενέργειες admin:
-    - Χωρίς παραμέτρους: Επιστρέφει λίστα με διαθέσιμες ενέργειες.
-    - Με παραμέτρους: Εκτελεί συγκεκριμένες ενέργειες.
-    """
-    if request.method == 'POST':
-        data = request.json
-        operation = data.get("operation")
-        if operation == "usermod":
-            # Παράδειγμα τροποποίησης χρήστη
-            return jsonify({"message": "User modified."})
-        elif operation == "addpasses":
-            return jsonify({"message": "Passes added."})
-        else:
-            return jsonify({"error": "Invalid operation."}), 400
-    else:
-        # GET method - επιστροφή διαθέσιμων ενεργειών
-        return jsonify({
-            "available_operations": [
-                "usermod (για δημιουργία/τροποποίηση χρήστη)",
-                "addpasses (για εισαγωγή δεδομένων)",
-                "users (για εμφάνιση όλων των χρηστών)"
-            ]
-        })
+# Mock database (αντικατάστησέ το με πραγματική βάση δεδομένων)
+users_db = {}
+
+@app.route('/api/admin/usermod/', methods=["POST"])
+def admin_usermod():
+    """ Δημιουργία ή ενημέρωση χρήστη """
+    data = request.json
+    username = data.get("username")
+    passw = data.get("passw")
+
+    if not username or not passw:
+        return jsonify({"error": "Απαιτούνται username και password"}), 400
+
+    # Προσθήκη ή ενημέρωση χρήστη στη βάση
+    users_db[username] = passw
+    return jsonify({"message": f"Ο χρήστης {username} δημιουργήθηκε/ενημερώθηκε επιτυχώς"}), 200
+
+# Mock database
+users_db = {"alice": "pass123", "bob": "secure456"}
+addresses_db = []
+
+@app.route("/api/admin/users", methods=["GET"])
+def users():
+    """Επιστρέφει τη λίστα των usernames"""
+    return jsonify({"users": list(users_db.keys())})
+
+@app.route("/api/admin/addpasses", methods=["POST"])
+def addpasses():
+    """Προσθέτει διευθύνσεις από αρχείο CSV"""
+    try:
+        data = request.get_json()
+        csv_filename = data.get("source")
+
+        if not csv_filename:
+            return jsonify({"error": "Απαιτείται όνομα αρχείου"}), 400
+
+        with open(csv_filename, newline="", encoding="utf-8") as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                addresses_db.append(row[0])  # Αποθηκεύει κάθε διεύθυνση
+
+        return jsonify({"message": "Διευθύνσεις προστέθηκαν επιτυχώς"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

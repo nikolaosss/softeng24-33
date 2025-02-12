@@ -1,0 +1,43 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Toll Station Management API",
+    "description": "API documentation for managing toll stations and passes.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/admin/healthcheck": {
+      "get": {
+        "summary": "Healthcheck",
+        "description": "Checks connectivity between the user and the database.",
+        "responses": {
+          "200": {
+            "description": "Successful connection",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "OK",
+                  "dbconnection": "mysql://root@localhost/connect.oll",
+                  "n_stations": 10,
+                  "n_tags": 100,
+                  "n_passes": 1000
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Failed connection",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "failed",
+                  "dbconnection": "mysql://root@localhost/connect.oll"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

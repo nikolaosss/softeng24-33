@@ -1,0 +1,68 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Toll Station Management API",
+    "description": "API documentation for managing toll stations and passes.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/admin/addpasses": {
+      "post": {
+        "summary": "Add Passes",
+        "description": "Updates pass events and associated tables with the data contained in a CSV file. The file must be provided as `multipart/form-data` with MIME type `text/csv`.",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The CSV file containing pass events. It must conform to the format of `passes-sample.csv`."
+                  }
+                },
+                "required": ["file"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pass events successfully updated.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "OK",
+                  "info": "Data successfully imported"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No file uploaded or invalid file format.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "failed",
+                  "info": "No file uploaded"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error during file processing or data insertion.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "failed",
+                  "info": "reason"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

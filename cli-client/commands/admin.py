@@ -15,7 +15,7 @@ def admin(args=None):
         return
 
     # Εκτέλεση της κατάλληλης λειτουργίας admin
-    if args.username and args.passw:
+    if args.usermod and args.username and args.passw:
         admin_usermod(args.username, args.passw)
     elif args.source:
         admin_addpasses(args.source)

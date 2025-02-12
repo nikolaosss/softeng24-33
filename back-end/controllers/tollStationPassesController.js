@@ -9,7 +9,7 @@ exports.getTollStationPasses = async (req, res) => {
 
     if (format === 'csv') {
       res.header('Content-Type', 'text/csv');
-      res.attachment(`toll_station_passes_${tollStationID}_${date_from}_${date_to}.csv`);
+      res.attachment('toll_station_passes_${tollStationID}_${date_from}_${date_to}.csv');
       res.send(response.csv);
     } else {
       res.status(200).json(response);
